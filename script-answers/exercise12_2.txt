@@ -4,3 +4,5 @@ root@0695a7980145:/# mkdir usr/src/app
 root@0695a7980145:/# touch /usr/src/app/index.js
 root@0695a7980145:/# ls usr/src/app/
 index.js
+root@0695a7980145:/# exit
+exit
