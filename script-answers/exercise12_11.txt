@@ -1,0 +1,16 @@
+antti@Anas:~/Documents/Koulu/part12-containers-applications/todo-app/todo-backend$ docker-compose -f docker-compose.dev.yml up -d
+antti@Anas:~/Documents/Koulu/part12-containers-applications/todo-app/todo-backend$ docker exec -it todo-backend-redis-1 bash
+
+root@196c7e7ca427:/data# redis-cli
+
+127.0.0.1:6379> KEYS *
+1) "added_todos"
+
+127.0.0.1:6379> GET "added_todos"
+"12"
+
+127.0.0.1:6379> SET "added_todos" 9001
+OK
+
+127.0.0.1:6379> DEL "added_todos"
+(integer) 1

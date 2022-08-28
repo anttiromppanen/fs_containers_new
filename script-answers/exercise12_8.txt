@@ -1,0 +1,63 @@
+antti@Anas:~/Documents/Koulu/part12-containers-applications/todo-app/todo-backend$ docker-compose -f docker-compose.dev.yml up -d
+[+] Running 2/2
+ ⠿ Network todo-backend_default    Created                                                                                                                0.0s
+ ⠿ Container todo-backend-mongo-1  Started                                                                                                                0.7s
+
+antti@Anas:~/Documents/Koulu/part12-containers-applications/todo-app/todo-backend$ docker container ls
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                     NAMES
+cd96bb4a3b6a   mongo     "docker-entrypoint.s…"   20 minutes ago   Up 20 minutes   0.0.0.0:3456->27017/tcp   todo-backend-mongo-1
+
+antti@Anas:~/Documents/Koulu/part12-containers-applications/todo-app/todo-backend$ docker exec -it todo-backend-mongo-1 bash
+
+antti@Anas:~/Documents/Koulu/part12-containers-applications/todo-app/todo-backend$ docker exec -it todo-backend-mongo-1 mongosh -u root -p example
+
+test> show dbs
+admin         100.00 KiB
+config         72.00 KiB
+local          72.00 KiB
+the_database   56.00 KiB
+
+test> use the_database
+switched to db the_database
+
+the_database> show collections
+todos
+
+the_database> db.todos.find({})
+[
+  {
+    _id: ObjectId("630b3ac3d3f634196aafdf01"),
+    text: 'Write code',
+    done: true
+  },
+  {
+    _id: ObjectId("630b3ac3d3f634196aafdf02"),
+    text: 'Learn about containers',
+    done: false
+  }
+]
+
+the_database> db.todos.insertOne({ text: 'Increase the number of tools in my toolbelt', done: false })
+{
+  acknowledged: true,
+  insertedId: ObjectId("630bab0c056613a35717ee7d")
+}
+
+the_database> db.todos.find({})
+[
+  {
+    _id: ObjectId("630b3ac3d3f634196aafdf01"),
+    text: 'Write code',
+    done: true
+  },
+  {
+    _id: ObjectId("630b3ac3d3f634196aafdf02"),
+    text: 'Learn about containers',
+    done: false
+  },
+  {
+    _id: ObjectId("630bab0c056613a35717ee7d"),
+    text: 'Increase the number of tools in my toolbelt',
+    done: false
+  }
+]
