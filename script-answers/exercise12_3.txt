@@ -1,0 +1,2 @@
+antti@Anas:~/Documents/Koulu/part12-containers-applications$ docker start -i epic_perlman
+root@056bd3324649:/# vim /usr/src/app/index.js
