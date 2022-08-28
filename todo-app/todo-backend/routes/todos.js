@@ -40,8 +40,8 @@ singleRouter.get("/", async (req, res) => {
 
 /* PUT todo. */
 singleRouter.put("/", async (req, res) => {
-  req.todo.text = req.body.text;
-  req.todo.done = req.body.done;
+  req.todo.text = req.body.text && req.body.text;
+  req.todo.done = req.body.done && req.body.done;
 
   const updatedTodo = await req.todo.save();
   res.send(updatedTodo);
