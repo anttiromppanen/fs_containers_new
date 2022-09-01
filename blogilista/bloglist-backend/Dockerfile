@@ -4,4 +4,4 @@ COPY --chown=node:node . .
 RUN npm ci
 ENV DEBUG=playground:*
 USER node
-CMD ["npm", "run", "dev"]
+CMD npm start

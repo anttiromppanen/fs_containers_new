@@ -1,0 +1,30 @@
+services:
+  app:
+    image: bloglist-frontend
+    build:
+      dockerfile: ./bloglist-frontend/Dockerfile
+    ports:
+      - 3000:80
+    environment:
+      - DANGEROUSLY_DISABLE_HOST_CHECK=true
+    container_name: bloglist-frontend # This will name the container
+
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: reverse-proxy
+    depends_on:
+      - app # wait for the frontend container to be started
+
+  server:
+    image: bloglist-backend
+    build:
+      dockerfile: ./bloglist-backend/Dockerfile
+    ports:
+      - 3001:3001
+    environment:
+      - MONGODB_URI=mongodb+srv://ana:ana@cluster0.3anup.mongodb.net/blogilista-app?retryWrites=true&w=majority
+    container_name: bloglist-backend

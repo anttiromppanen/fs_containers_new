@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  server:
+    image: bloglist-backend
+    build:
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - 3001:3001
+    environment:
+      - MONGODB_URI=mongodb+srv://ana:ana@cluster0.3anup.mongodb.net/blogilista-app?retryWrites=true&w=majority
